@@ -2,6 +2,7 @@
 package View;
 
 import Model.Funcionario;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,6 +73,11 @@ public class Tela extends javax.swing.JFrame {
         });
 
         jButton2.setText("Deletar Registro");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         nomeTf.setText("Ex: Gelis dionson");
 
@@ -369,6 +375,12 @@ public class Tela extends javax.swing.JFrame {
             setSexo("Prefere não informar");
         }
     }//GEN-LAST:event_nInformarBtActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String Arquivo = registroTf.getText() + ".dat";
+        File file = new File(Arquivo);
+        file.delete();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
