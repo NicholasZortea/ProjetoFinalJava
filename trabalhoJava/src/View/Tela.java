@@ -248,12 +248,30 @@ public class Tela extends javax.swing.JFrame {
             
             FileWriter arq = null;
         try {
-            arq = new FileWriter(nome);
+            arq = new FileWriter(f.getNome() + ".dat");
         } catch (IOException ex) {
             Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
         }
             PrintWriter gravarArq = new PrintWriter(arq);
-            gravarArq.print(f);
+            gravarArq.print("Registro: " + f.getRegistro() + ";");
+            gravarArq.println();
+            gravarArq.print("Salário: " + f.getSalario() + ";");
+            gravarArq.println();
+            gravarArq.print("Nome: " + f.getNome() + ";");
+            gravarArq.println();
+            gravarArq.print("Idade: " + f.getIdade() + ";");
+            gravarArq.println();
+            gravarArq.print("Rua: " + f.getRua() + ";");
+            gravarArq.println();
+            gravarArq.print("Bairro: " + f.getBairro() + ";");
+            gravarArq.println();
+            gravarArq.print("Sexo: " + f.getSexo() + ";");
+            gravarArq.println();
+            gravarArq.print("Altura: " + f.getAltura() + " cm;");
+            gravarArq.println();
+            gravarArq.print("Registro: "+ f.getRegistro() + ";");
+            gravarArq.println();
+            gravarArq.print("Telefone: " + f.getTelefone() + ";");
         try {
             arq.close();
         } catch (IOException ex) {
