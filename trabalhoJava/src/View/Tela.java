@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 
 public class Tela extends javax.swing.JFrame {
@@ -16,7 +17,18 @@ public class Tela extends javax.swing.JFrame {
         initComponents();
     }
     private String sexo;
+    private boolean estagiario;
+    private double bolsaTela;
+    private int horas_trabalhoTela;
+    
+    public boolean isEstagiario() {
+        return estagiario;
+    }
 
+    public void setEstagiario(boolean estagiario) {
+        this.estagiario = estagiario;
+    }
+    
     public String getSexo() {
         return sexo;
     }
@@ -58,10 +70,11 @@ public class Tela extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         salarioTf = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         masculinoBt = new javax.swing.JRadioButton();
         femininoBt = new javax.swing.JRadioButton();
         nInformarBt = new javax.swing.JRadioButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        estagiarioRbt = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,55 +196,73 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        estagiarioRbt.setText("O funcionário é estágiario");
+        estagiarioRbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estagiarioRbtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nomeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(idadeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(estagiarioRbt)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(femininoBt)
+                    .addComponent(jLabel3)
+                    .addComponent(masculinoBt))
+                .addGap(111, 111, 111))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nInformarBt)
+                .addGap(59, 59, 59))
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
                     .addComponent(jLabel9)
-                    .addComponent(alturaTf, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(registroTf))
+                    .addComponent(alturaTf)
+                    .addComponent(registroTf, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel10)
-                            .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(idadeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jSeparator4)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nInformarBt)
-                    .addComponent(femininoBt)
-                    .addComponent(jLabel3)
-                    .addComponent(masculinoBt))
-                .addGap(59, 59, 59))
-            .addComponent(jSeparator3)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,49 +278,51 @@ public class Tela extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(idadeTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(idadeTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(estagiarioRbt)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(masculinoBt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(femininoBt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nInformarBt)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(femininoBt)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(nInformarBt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(alturaTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(registroTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(alturaTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(registroTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,7 +330,7 @@ public class Tela extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-         int registro = Integer.parseInt(registroTf.getText());
+        int registro = Integer.parseInt(registroTf.getText());
         double salario = Double.parseDouble(salarioTf.getText());
         String nome = nomeTf.getText();
         int idade = Integer.parseInt(idadeTf.getText());
@@ -310,46 +343,85 @@ public class Tela extends javax.swing.JFrame {
         
         
         Funcionario f = new Funcionario(registro, salario, nome, idade, rua, bairro, SexoSelecionado, altura, telefone);
-        
-
-        
-            
-            FileWriter arq = null;
-        try {
-            arq = new FileWriter(f.getRegistro()+ ".dat");
-        } catch (IOException ex) {
-            Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+        if (isEstagiario()){
+            telaEstagiario Estagiario = new telaEstagiario();
+            Estagiario.setVisible(true);
+            this.bolsaTela = Estagiario.getBolsa();
+            this.horas_trabalhoTela = Estagiario.getHoras_trabalhadas();
         }
-            PrintWriter gravarArq = new PrintWriter(arq);
-            gravarArq.print("Registro: " + f.getRegistro() + ";");
-            gravarArq.println();
-            gravarArq.print("Salário: " + f.getSalario() + ";");
-            gravarArq.println();
-            gravarArq.print("Nome: " + f.getNome() + ";");
-            gravarArq.println();
-            gravarArq.print("Idade: " + f.getIdade() + ";");
-            gravarArq.println();
-            gravarArq.print("Rua: " + f.getRua() + ";");
-            gravarArq.println();
-            gravarArq.print("Bairro: " + f.getBairro() + ";");
-            gravarArq.println();
-            gravarArq.print("Sexo: " + f.getSexo() + ";");
-            gravarArq.println();
-            gravarArq.print("Altura: " + f.getAltura() + " cm;");
-            gravarArq.println();
-            gravarArq.print("Registro: "+ f.getRegistro() + ";");
-            gravarArq.println();
-            gravarArq.print("Telefone: " + f.getTelefone() + ";");
-        try {
-            arq.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
+        
+       
+        if(isEstagiario()){
+                FileWriter arq = null;
+                try {
+                    arq = new FileWriter(f.getRegistro()+ ".dat");
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                    PrintWriter gravarArq = new PrintWriter(arq);
+                    gravarArq.print("Registro: " + f.getRegistro() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Salário: " + f.getSalario() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Nome: " + f.getNome() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Idade: " + f.getIdade() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Rua: " + f.getRua() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Bairro: " + f.getBairro() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Sexo: " + f.getSexo() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Altura: " + f.getAltura() + " cm;");
+                    gravarArq.println();
+                    gravarArq.print("Registro: "+ f.getRegistro() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Telefone: " + f.getTelefone() + ";");
+                    gravarArq.print("Bolsa: " + this.bolsaTela + ";");
+                    gravarArq.println();
+                    gravarArq.print("Horas Trabalhadas: " + this.horas_trabalhoTela + ";");
+                try {
+                    arq.close();
+                }catch (IOException ex) {
+                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }else{
+                FileWriter arq = null;
+                try {
+                    arq = new FileWriter(f.getRegistro()+ ".dat");
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                PrintWriter gravarArq = new PrintWriter(arq);
+                gravarArq.print("Registro: " + f.getRegistro() + ";");
+                gravarArq.println();
+                gravarArq.print("Salário: " + f.getSalario() + ";");
+                gravarArq.println();
+                gravarArq.print("Nome: " + f.getNome() + ";");
+                gravarArq.println();
+                gravarArq.print("Idade: " + f.getIdade() + ";");
+                gravarArq.println();
+                gravarArq.print("Rua: " + f.getRua() + ";");
+                gravarArq.println();
+                gravarArq.print("Bairro: " + f.getBairro() + ";");
+                gravarArq.println();
+                gravarArq.print("Sexo: " + f.getSexo() + ";");
+                gravarArq.println();
+                gravarArq.print("Altura: " + f.getAltura() + " cm;");
+                gravarArq.println();
+                gravarArq.print("Registro: "+ f.getRegistro() + ";");
+                gravarArq.println();
+                gravarArq.print("Telefone: " + f.getTelefone() + ";");
 
-
-
+                try {
+                    arq.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
+        }
+           
 
                 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -381,6 +453,16 @@ public class Tela extends javax.swing.JFrame {
         File file = new File(Arquivo);
         file.delete();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void estagiarioRbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estagiarioRbtActionPerformed
+        if (estagiarioRbt.isSelected()){
+            setEstagiario(true);
+        }
+        else{
+            setEstagiario(false);
+        }
+         
+    }//GEN-LAST:event_estagiarioRbtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,6 +503,7 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.ButtonGroup GrupoBt;
     private javax.swing.JTextField alturaTf;
     private javax.swing.JTextField bairroTf;
+    private javax.swing.JCheckBox estagiarioRbt;
     private javax.swing.JRadioButton femininoBt;
     private javax.swing.JTextField idadeTf;
     private javax.swing.JButton jButton1;
@@ -438,7 +521,7 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JRadioButton masculinoBt;
     private javax.swing.JRadioButton nInformarBt;
     private javax.swing.JTextField nomeTf;

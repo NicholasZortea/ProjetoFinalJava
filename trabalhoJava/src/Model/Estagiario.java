@@ -31,6 +31,4 @@ public final class Estagiario extends Funcionario{
         this.horas_servico = horas_servico;
     }
     
-    
-    
 }
