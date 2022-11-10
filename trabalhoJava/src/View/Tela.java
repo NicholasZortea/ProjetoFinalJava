@@ -1,7 +1,9 @@
 
 package View;
 
+import Model.Estagiario;
 import Model.Funcionario;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,20 +17,40 @@ public class Tela extends javax.swing.JFrame {
 
     public Tela() {
         initComponents();
+        desativaCaixaTexto();
+        setEstagiario(false);
     }
     private String sexo;
-    private boolean estagiario;
-    private double bolsaTela;
-    private int horas_trabalhoTela;
-    
-    public boolean isEstagiario() {
+    private Boolean estagiario;
+
+    public Boolean getEstagiario() {
         return estagiario;
     }
 
-    public void setEstagiario(boolean estagiario) {
+    public void setEstagiario(Boolean estagiario) {
         this.estagiario = estagiario;
     }
     
+    public void desativaCaixaTexto(){
+            bolsaTf.setText(null);
+            horasTrabalhadasTf.setText(null);
+            bolsaTf.setBackground(Color.gray);
+            horasTrabalhadasTf.setBackground(Color.gray);
+            bolsaTf.setEditable(false);
+            horasTrabalhadasTf.setEditable(false);
+    }
+    
+    public void ativaCaixaTexto(){
+            bolsaTf.setEditable(true);
+            horasTrabalhadasTf.setEditable(true);
+            setEstagiario(true);
+            bolsaTf.setText("Ex: 1");
+            horasTrabalhadasTf.setText("Ex: 16");
+            bolsaTf.setBackground(Color.white);
+            horasTrabalhadasTf.setBackground(Color.white);
+    }
+    
+
     public String getSexo() {
         return sexo;
     }
@@ -75,6 +97,10 @@ public class Tela extends javax.swing.JFrame {
         nInformarBt = new javax.swing.JRadioButton();
         jSeparator4 = new javax.swing.JSeparator();
         estagiarioRbt = new javax.swing.JCheckBox();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        bolsaTf = new javax.swing.JTextField();
+        horasTrabalhadasTf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,7 +187,7 @@ public class Tela extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bairroTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel9.setText("Registro:");
@@ -203,6 +229,16 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Bolsa:");
+
+        jLabel12.setText("Horas trabalhadas:");
+
+        horasTrabalhadasTf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                horasTrabalhadasTfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,35 +270,38 @@ public class Tela extends javax.swing.JFrame {
                 .addComponent(jSeparator1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel9)
-                    .addComponent(alturaTf)
-                    .addComponent(registroTf, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel10)
-                            .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator4)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(85, 85, 85)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103))
+                .addGap(97, 97, 97))
+            .addComponent(jSeparator4)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel9)
+                            .addComponent(alturaTf)
+                            .addComponent(registroTf, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                            .addComponent(bolsaTf))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel10)
+                                    .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(horasTrabalhadasTf, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,40 +328,47 @@ public class Tela extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(femininoBt)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(nInformarBt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(nInformarBt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bolsaTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(horasTrabalhadasTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(alturaTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(registroTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(alturaTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(registroTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
         );
 
         pack();
@@ -339,25 +385,58 @@ public class Tela extends javax.swing.JFrame {
         String SexoSelecionado = getSexo();
         int altura = Integer.parseInt(alturaTf.getText());
         String telefone = telefoneTf.getText();   
+
         
-        
-        
-        Funcionario f = new Funcionario(registro, salario, nome, idade, rua, bairro, SexoSelecionado, altura, telefone);
-        if (isEstagiario()){
-            telaEstagiario Estagiario = new telaEstagiario();
-            Estagiario.setVisible(true);
-            this.bolsaTela = Estagiario.getBolsa();
-            this.horas_trabalhoTela = Estagiario.getHoras_trabalhadas();
-        }
-        
-       
-        if(isEstagiario()){
-                FileWriter arq = null;
-                try {
-                    arq = new FileWriter(f.getRegistro()+ ".dat");
-                } catch (IOException ex) {
-                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-                 }
+                if(getEstagiario() == true){
+                    int bolsa = Integer.parseInt(bolsaTf.getText());
+                    int horas_trabalho = Integer.parseInt(horasTrabalhadasTf.getText());
+                    Estagiario e = new Estagiario(bolsa, horas_trabalho, registro, salario, nome, idade, rua, bairro, sexo, altura, telefone);
+                    
+                    FileWriter arq = null;
+                    try {
+                        arq = new FileWriter(e.getRegistro()+ ".dat");
+                    }catch (IOException ex) {
+                        Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    PrintWriter gravarArq = new PrintWriter(arq);
+                    gravarArq.print("Registro: " + e.getRegistro() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Salário: " + e.getSalario() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Nome: " + e.getNome() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Idade: " + e.getIdade() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Rua: " + e.getRua() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Bairro: " + e.getBairro() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Sexo: " + e.getSexo() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Altura: " + e.getAltura() + " cm;");
+                    gravarArq.println();
+                    gravarArq.print("Registro: "+ e.getRegistro() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Telefone: " + e.getTelefone() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Bolsa: " + e.getBolsa() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Horas Trabalhadas: " + e.getHoras_servico() + ";");
+
+                    try {
+                        arq.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else if (getEstagiario() == false){
+                    Funcionario f = new Funcionario(registro, salario, nome, idade, rua, bairro, SexoSelecionado, altura, telefone);
+                    FileWriter arq = null;
+                    try {
+                        arq = new FileWriter(f.getRegistro()+ ".dat");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     PrintWriter gravarArq = new PrintWriter(arq);
                     gravarArq.print("Registro: " + f.getRegistro() + ";");
                     gravarArq.println();
@@ -378,52 +457,14 @@ public class Tela extends javax.swing.JFrame {
                     gravarArq.print("Registro: "+ f.getRegistro() + ";");
                     gravarArq.println();
                     gravarArq.print("Telefone: " + f.getTelefone() + ";");
-                    gravarArq.print("Bolsa: " + this.bolsaTela + ";");
-                    gravarArq.println();
-                    gravarArq.print("Horas Trabalhadas: " + this.horas_trabalhoTela + ";");
-                try {
-                    arq.close();
-                }catch (IOException ex) {
-                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+
+                    try {
+                        arq.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
                     }
-            }else{
-                FileWriter arq = null;
-                try {
-                    arq = new FileWriter(f.getRegistro()+ ".dat");
-                } catch (IOException ex) {
-                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                PrintWriter gravarArq = new PrintWriter(arq);
-                gravarArq.print("Registro: " + f.getRegistro() + ";");
-                gravarArq.println();
-                gravarArq.print("Salário: " + f.getSalario() + ";");
-                gravarArq.println();
-                gravarArq.print("Nome: " + f.getNome() + ";");
-                gravarArq.println();
-                gravarArq.print("Idade: " + f.getIdade() + ";");
-                gravarArq.println();
-                gravarArq.print("Rua: " + f.getRua() + ";");
-                gravarArq.println();
-                gravarArq.print("Bairro: " + f.getBairro() + ";");
-                gravarArq.println();
-                gravarArq.print("Sexo: " + f.getSexo() + ";");
-                gravarArq.println();
-                gravarArq.print("Altura: " + f.getAltura() + " cm;");
-                gravarArq.println();
-                gravarArq.print("Registro: "+ f.getRegistro() + ";");
-                gravarArq.println();
-                gravarArq.print("Telefone: " + f.getTelefone() + ";");
-
-                try {
-                    arq.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-        }
-           
-
-                
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bairroTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bairroTfActionPerformed
@@ -457,12 +498,19 @@ public class Tela extends javax.swing.JFrame {
     private void estagiarioRbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estagiarioRbtActionPerformed
         if (estagiarioRbt.isSelected()){
             setEstagiario(true);
+            ativaCaixaTexto();
         }
-        else{
+        else if (estagiarioRbt.isSelected() == false)
+        {
             setEstagiario(false);
+            desativaCaixaTexto();
         }
          
     }//GEN-LAST:event_estagiarioRbtActionPerformed
+
+    private void horasTrabalhadasTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horasTrabalhadasTfActionPerformed
+        
+    }//GEN-LAST:event_horasTrabalhadasTfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -503,13 +551,17 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.ButtonGroup GrupoBt;
     private javax.swing.JTextField alturaTf;
     private javax.swing.JTextField bairroTf;
+    private javax.swing.JTextField bolsaTf;
     private javax.swing.JCheckBox estagiarioRbt;
     private javax.swing.JRadioButton femininoBt;
+    private javax.swing.JTextField horasTrabalhadasTf;
     private javax.swing.JTextField idadeTf;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

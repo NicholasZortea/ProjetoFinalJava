@@ -1,4 +1,4 @@
-Registro: 1;
+Registro: 2;
 Salário: 1700.0;
 Nome: Gelis dionson;
 Idade: 99;
@@ -6,5 +6,7 @@ Rua: Ex: Jacarandá;
 Bairro: Ex: Centro;
 Sexo: Masculino;
 Altura: 190 cm;
-Registro: 1;
+Registro: 2;
 Telefone: Ex: (54) 99999-9999;
+Bolsa: 1;
+Horas Trabalhadas: 16;
