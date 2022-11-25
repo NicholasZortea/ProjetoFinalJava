@@ -410,17 +410,44 @@ public class Tela extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        int registro = Integer.parseInt(registroTf.getText());
-        double salario = Double.parseDouble(salarioTf.getText());
+       int registro = 0;
+       boolean informacoesCorretas = true;
+       try { registro = Integer.parseInt(registroTf.getText());
+        } catch (java.lang.NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Digite um número de registro válido");
+            informacoesCorretas = false;
+        }
+        
+       int altura = 0;
+        try { altura = Integer.parseInt(alturaTf.getText());
+        } catch (java.lang.NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Digite uma altura válida");
+            informacoesCorretas = false;
+        }
+       
+        double salario = 0;
+        try { salario = Double.parseDouble(salarioTf.getText());
+        } catch (java.lang.NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Digite um salário válido");
+            informacoesCorretas = false;
+        }
+        
+        int idade = 0;
+        try { idade = Integer.parseInt(idadeTf.getText());
+        } catch (java.lang.NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Digite uma idade válida");
+            informacoesCorretas = false;
+        }
+        
         String nome = nomeTf.getText();
-        int idade = Integer.parseInt(idadeTf.getText());
         String rua = ruaTf.getText();
         String bairro = bairroTf.getText();
         String SexoSelecionado = getSexo();
-        int altura = Integer.parseInt(alturaTf.getText());
-        String telefone = telefoneTf.getText();   
-
+        String telefone = telefoneTf.getText();
         
+           
+
+                if(informacoesCorretas){
                 if(getEstagiario() == true){
                     int bolsa = Integer.parseInt(bolsaTf.getText());
                     int horas_trabalho = Integer.parseInt(horasTrabalhadasTf.getText());
@@ -499,6 +526,7 @@ public class Tela extends javax.swing.JFrame {
                         Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso");
+                }
                 }
          
     }//GEN-LAST:event_jButton1ActionPerformed
