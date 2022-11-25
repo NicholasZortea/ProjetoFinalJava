@@ -10,11 +10,7 @@ public final class Estagiario extends Funcionario{
         this.bolsa = bolsa;
         this.horas_servico = horas_servico;
     }
-
- 
-
-  
-
+    
     public int getBolsa() {
         return bolsa;
     }

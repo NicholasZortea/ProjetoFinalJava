@@ -4,14 +4,24 @@
  */
 package View;
 
+import Controller.ConsultaPreferencia;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
+
+
+
+
+
 public class Criatividade extends javax.swing.JFrame {
 
     /**
@@ -40,6 +50,7 @@ public class Criatividade extends javax.swing.JFrame {
         cadastraPreferenciaBtn = new javax.swing.JButton();
         deletaPreferenciaBtn = new javax.swing.JButton();
         consultaPreferenciaBtn = new javax.swing.JButton();
+        fecharBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,8 +100,25 @@ public class Criatividade extends javax.swing.JFrame {
         });
 
         deletaPreferenciaBtn.setText("Deletar Preferência");
+        deletaPreferenciaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletaPreferenciaBtnActionPerformed(evt);
+            }
+        });
 
         consultaPreferenciaBtn.setText("Consultar Prefência");
+        consultaPreferenciaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPreferenciaBtnActionPerformed(evt);
+            }
+        });
+
+        fecharBtn.setText("Fechar");
+        fecharBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fecharBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,9 +133,6 @@ public class Criatividade extends javax.swing.JFrame {
                         .addComponent(deletaPreferenciaBtn)
                         .addGap(74, 74, 74)
                         .addComponent(consultaPreferenciaBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,11 +155,18 @@ public class Criatividade extends javax.swing.JFrame {
                     .addComponent(registroFuncionarioTf, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(340, 340, 340))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(217, 217, 217)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fecharBtn))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecharBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -263,13 +295,16 @@ public class Criatividade extends javax.swing.JFrame {
         String nome;
         String idade;
         String frase = "";
+        boolean arquivoExiste = true;
         String caminho = registroFuncionarioTf.getText() + ".dat";
             FileInputStream stream = null;
         try {
             stream = new FileInputStream(caminho);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Criatividade.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "O funcionário não existe");
+            arquivoExiste = false;
         }
+        if(arquivoExiste){
             InputStreamReader reader = new InputStreamReader(stream);
             BufferedReader br = new BufferedReader(reader);
             String linha = null;
@@ -293,10 +328,58 @@ public class Criatividade extends javax.swing.JFrame {
                 Logger.getLogger(Criatividade.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println(frase);
-nome = StringUtils.substringBetween(frase, "Nome: ", ";");
-System.out.println(nome);
+        
+
+        nome = StringUtils.substringBetween(frase, "Nome: ", ";");
+        idade = StringUtils.substringBetween(frase,"Idade: ", ";");
+        
+   
+        FileWriter arq = null;
+                    try {
+                        arq = new FileWriter(registroFuncionarioTf.getText() + "sorvete.dat");
+                    }catch (IOException ex) {
+                        Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    PrintWriter gravarArq = new PrintWriter(arq);
+                    gravarArq.print("Nome: " + nome + ";");
+                    gravarArq.println();
+                    gravarArq.print("Idade: " + idade + ";");
+                    gravarArq.println();
+                    gravarArq.print("Marca preferida: " + marcaSorveteCb.getSelectedItem() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Tipo preferido: " + tipoSorveteCb.getSelectedItem() + ";");
+                    gravarArq.println();
+                    gravarArq.print("Sorvete preferido: " + sorveteCb.getSelectedItem() + ";");
+
+                    try {
+                        arq.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    JOptionPane.showMessageDialog(null, "Preferência Cadastrada");
+        }
     }//GEN-LAST:event_cadastraPreferenciaBtnActionPerformed
+
+    private void consultaPreferenciaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPreferenciaBtnActionPerformed
+        ConsultaPreferencia consultapreferencia = new ConsultaPreferencia();
+        consultapreferencia.setVisible(true);
+        
+    }//GEN-LAST:event_consultaPreferenciaBtnActionPerformed
+
+    private void deletaPreferenciaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletaPreferenciaBtnActionPerformed
+        String Arquivo = registroFuncionarioTf.getText() + "sorvete.dat";
+        File file = new File(Arquivo);
+        if(file.delete()){
+            JOptionPane.showMessageDialog(null, "Preferência do funcionário deletada com sucesso");
+        }else{
+            JOptionPane.showMessageDialog(null, "O registro de funcionário não existe");
+        }
+    }//GEN-LAST:event_deletaPreferenciaBtnActionPerformed
+
+    private void fecharBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_fecharBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -337,6 +420,7 @@ System.out.println(nome);
     private javax.swing.JButton cadastraPreferenciaBtn;
     private javax.swing.JButton consultaPreferenciaBtn;
     private javax.swing.JButton deletaPreferenciaBtn;
+    private javax.swing.JButton fecharBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

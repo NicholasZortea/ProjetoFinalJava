@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+package Controller;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -16,12 +16,12 @@ import java.util.logging.Logger;
  *
  * @author Nicholas
  */
-public class consultaRegistro extends javax.swing.JFrame {
+public class ConsultaRegistro extends javax.swing.JFrame {
 
     /**
      * Creates new form consultaRegistro
      */
-    public consultaRegistro() {
+    public ConsultaRegistro() {
         initComponents();
     }
 
@@ -110,7 +110,7 @@ public class consultaRegistro extends javax.swing.JFrame {
         try {
             stream = new FileInputStream(caminho);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(consultaRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
             InputStreamReader reader = new InputStreamReader(stream);
             BufferedReader br = new BufferedReader(reader);
@@ -118,10 +118,9 @@ public class consultaRegistro extends javax.swing.JFrame {
         try {
             linha = br.readLine();
         } catch (IOException ex) {
-            Logger.getLogger(consultaRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
             while(linha != null) {
-            System.out.println(linha);
             try {
                 linha = br.readLine();
                 if(linha == null){// se a linha for nula não vai adicionala ao texto
@@ -129,13 +128,16 @@ public class consultaRegistro extends javax.swing.JFrame {
                 }
                 texto += linha; // texto sempre vai ser igual ao texto mais a linha pulando a outra linha
                 texto += "\n";
-                System.out.println(texto);
             } catch (IOException ex) {
-                Logger.getLogger(consultaRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ConsultaRegistro.class.getName()).log(Level.SEVERE, null, ex);
             }
           }
         consultaTa.setText(texto);
-    
+        try {
+            stream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ConsultaRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_consultarBtnActionPerformed
@@ -161,20 +163,21 @@ public class consultaRegistro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(consultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(consultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(consultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(consultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new consultaRegistro().setVisible(true);
+                new ConsultaRegistro().setVisible(true);
             }
         });
     }

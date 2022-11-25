@@ -1,6 +1,7 @@
 
 package View;
 
+import Controller.ConsultaRegistro;
 import Model.Estagiario;
 import Model.Funcionario;
 import java.awt.Color;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
 
 public class Tela extends javax.swing.JFrame {
 
@@ -102,6 +103,7 @@ public class Tela extends javax.swing.JFrame {
         bolsaTf = new javax.swing.JTextField();
         horasTrabalhadasTf = new javax.swing.JTextField();
         consultaRegistro = new javax.swing.JButton();
+        tela2Btn = new javax.swing.JButton();
 
         jButton3.setText("Deletar Registro");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +256,13 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        tela2Btn.setText("Tela 2");
+        tela2Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tela2BtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -286,32 +295,6 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap())
             .addComponent(jSeparator4)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel9)
-                            .addComponent(alturaTf)
-                            .addComponent(registroTf, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                            .addComponent(bolsaTf))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel10)
-                                    .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(horasTrabalhadasTf, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
@@ -319,6 +302,37 @@ public class Tela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(consultaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel9)
+                                    .addComponent(alturaTf)
+                                    .addComponent(registroTf, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                    .addComponent(bolsaTf))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel10)
+                                            .addComponent(telefoneTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12)
+                                            .addComponent(horasTrabalhadasTf, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(salarioTf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(tela2Btn, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,7 +400,9 @@ public class Tela extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(consultaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tela2Btn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -446,6 +462,7 @@ public class Tela extends javax.swing.JFrame {
                     } catch (IOException ex) {
                         Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    JOptionPane.showMessageDialog(null, "Estagiário cadastrado com sucesso");
                 }
                 else if (getEstagiario() == false){
                     Funcionario f = new Funcionario(registro, salario, nome, idade, rua, bairro, SexoSelecionado, altura, telefone);
@@ -481,6 +498,7 @@ public class Tela extends javax.swing.JFrame {
                     } catch (IOException ex) {
                         Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso");
                 }
          
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -510,7 +528,12 @@ public class Tela extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String Arquivo = registroTf.getText() + ".dat";
         File file = new File(Arquivo);
-        file.delete();
+        if(file.delete()){
+            JOptionPane.showMessageDialog(null, "Funcionario excluído com sucesso");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir o funcionário");
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void estagiarioRbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estagiarioRbtActionPerformed
@@ -535,9 +558,14 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void consultaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaRegistroActionPerformed
-        consultaRegistro consulta = new consultaRegistro();
+        ConsultaRegistro consulta = new ConsultaRegistro();
         consulta.setVisible(true);
     }//GEN-LAST:event_consultaRegistroActionPerformed
+
+    private void tela2BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tela2BtnActionPerformed
+        Criatividade criatividade = new Criatividade();
+        criatividade.setVisible(true);
+    }//GEN-LAST:event_tela2BtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -609,6 +637,7 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JTextField registroTf;
     private javax.swing.JTextField ruaTf;
     private javax.swing.JTextField salarioTf;
+    private javax.swing.JButton tela2Btn;
     private javax.swing.JTextField telefoneTf;
     // End of variables declaration//GEN-END:variables
 }
